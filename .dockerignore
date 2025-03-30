@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Environment variables
+.env
+
+# Build artifacts
+rockbox-playlist-generator
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Deployment files (not needed in the image)
+deployments/ 

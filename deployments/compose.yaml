@@ -1,0 +1,28 @@
+services:
+  rockbox-playlist-generator:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: rockbox-playlist-generator
+    volumes:
+      # Mount your music library (adjust the path to your local music folder)
+      - ${MUSIC_PATH:-/music}:/music:ro
+      # Mount a volume for the playlists output
+      - ${OUTPUT_PATH:-./playlists}:/music/playlists:rw
+    environment:
+      # Last.fm API credentials
+      - LASTFM_API_KEY=${LASTFM_API_KEY}
+      - LASTFM_API_SECRET=${LASTFM_API_SECRET}
+      # Default track limit (optional)
+      - DEFAULT_TRACK_LIMIT=${DEFAULT_TRACK_LIMIT:-50}
+    # Specify command line arguments (override the default CMD in Dockerfile)
+    command: ["-path", "/music", "-limit", "${TRACK_LIMIT:-0}"]
+    # Run once and remove container after completion
+    restart: "no"
+
+# Volumes to persist data
+volumes:
+  music:
+    driver: local
+  playlists:
+    driver: local 
